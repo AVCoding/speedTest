@@ -151,8 +151,8 @@ window.onload = function() {
 
             if (imageData.data[i] == 255) {
                 imageData.data[i] = 0;
-                data[i + 1] = 0;
-                data[i + 2] = 0;
+                imageData.data[i + 1] = 0;
+                imageData.data[i + 2] = 0;
             }
             else {
                 imageData.data[i] = 255;
