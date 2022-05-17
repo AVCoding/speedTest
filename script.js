@@ -2,6 +2,7 @@
 window.onload = function() { 
 
   var filterButton = document.getElementById('filterButton');
+  var withoutButton = document.getElementById('withoutButton');
   var canvas;
   var context;
 
@@ -18,7 +19,10 @@ window.onload = function() {
 
 
   var imageData;
-  filterButton.addEventListener('click', function () {
+
+
+  withoutButton.addEventListener('click', function () {
+    console.time('Function #1');
 
     imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 
@@ -113,10 +117,53 @@ window.onload = function() {
         const res = ccallArrays("doubleValues", "array", ["array"], [imageData.data], { heapIn: "HEAPU8", heapOut: "HEAPU8", returnArraySize: imageData.data.length });
             imageData.data.set(res);
 
-            context.putImageData(imageData, 0, 0);
-
+        context.putImageData(imageData, 0, 0);
+       console.timeEnd('Function #1')
        
+  });
 
+
+  filterButton.addEventListener('click', function () {
+    console.time('Function #2');
+
+     imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+
+
+        for (var i = 0; i < imageData.data.length; i += 4) {
+
+            ////Brown1 Filter
+            if (imageData.data[i] < 100) {
+                imageData.data[i] = 255;
+                imageData.data[i + 1] = 255;
+                imageData.data[i + 2] = 255;
+            }
+
+            if (imageData.data[i] != 255) {
+                imageData.data[i] = 0;
+                imageData.data[i + 1] = 0;
+                imageData.data[i + 2] = 0; 
+            }
+            else {
+                imageData.data[i] = 255;
+                imageData.data[i + 1] = 255;
+                imageData.data[i + 2] = 255;
+            }
+
+            if (imageData.data[i] == 255) {
+                imageData.data[i] = 0;
+                data[i + 1] = 0;
+                data[i + 2] = 0;
+            }
+            else {
+                imageData.data[i] = 255;
+                imageData.data[i + 1] = 255;
+                imageData.data[i + 2] = 255;
+            }
+        }
+
+     context.putImageData(imageData, 0, 0);
+     console.timeEnd('Function #2')
+       
   });
 
 }
