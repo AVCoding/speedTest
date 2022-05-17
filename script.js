@@ -21,7 +21,7 @@ window.onload = function() {
   var imageData;
 
 
-  withoutButton.addEventListener('click', function () {
+  filterButton.addEventListener('click', function () {
     console.time('Function #1');
 
     imageData = context.getImageData(0, 0, canvas.width, canvas.height);
@@ -123,7 +123,7 @@ window.onload = function() {
   });
 
 
-  filterButton.addEventListener('click', function () {
+  withoutButton.addEventListener('click', function () {
     console.time('Function #2');
 
      imageData = context.getImageData(0, 0, canvas.width, canvas.height);
